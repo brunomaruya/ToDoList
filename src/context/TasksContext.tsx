@@ -8,7 +8,7 @@ type TasksContextType = {
 export const TasksContext = createContext({} as TasksContextType);
 
 export const TasksProvider = ({ children }: { children: ReactNode }) => {
-  const [tasks, setTasks] = useState<string[]>(['task1', 'task2']);
+  const [tasks, setTasks] = useState<string[]>([]);
 
   const values = { tasks, setTasks };
   return (
