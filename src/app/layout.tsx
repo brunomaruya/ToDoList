@@ -13,8 +13,11 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className="bg-gray-900">
-        <header>
-          <h1 className="text-blue-700">TODO</h1>
+        <header className="bg-black">
+          <h1 className="text-blue-700 p-10 text-center font-bold text-2xl">
+            <span className="text-blue-400">To</span>
+            Do
+          </h1>
         </header>
         <main>{children}</main>
       </body>
