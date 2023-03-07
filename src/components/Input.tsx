@@ -2,7 +2,7 @@ import { TasksContext } from '@/context/TasksContext';
 import React, { useContext } from 'react';
 
 export default function Input() {
-  const { addTask, handleOnChange } = useContext(TasksContext);
+  const { addTask, handleOnChange, task } = useContext(TasksContext);
   return (
     <div className="flex gap-2 shadow-xl">
       <input
@@ -10,6 +10,7 @@ export default function Input() {
         placeholder="Add a New Task"
         type="text"
         onChange={handleOnChange}
+        value={task}
       />{' '}
       <button
         className="bg-blue-800 text-white py-2 px-4 rounded-lg hover:brightness-75 active:brightness-50"

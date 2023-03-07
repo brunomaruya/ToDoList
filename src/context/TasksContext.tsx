@@ -1,29 +1,49 @@
 'use client';
+import { useLocalStorage } from '@/hooks/useLocalStorage';
 import React, { createContext, ReactNode, useState } from 'react';
 
+interface ITasks {
+  text: string;
+  isDone: boolean;
+}
+
 type TasksContextType = {
-  tasks: string[];
+  tasks: ITasks[];
+  setTasks: React.Dispatch<React.SetStateAction<ITasks[]>>;
   addTask: () => void;
   task: string;
-  setTask: any;
-  handleOnChange: () => void;
+  setTask: React.Dispatch<React.SetStateAction<string>>;
+  handleOnChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
+  removeTask: (taskText: string) => void;
 };
 
 export const TasksContext = createContext({} as TasksContextType);
 
 export const TasksProvider = ({ children }: { children: ReactNode }) => {
-  const [tasks, setTasks] = useState<string[]>([]);
+  const [tasks, setTasks] = useLocalStorage<ITasks[]>('tasks', []);
   const [task, setTask] = useState<string>('');
 
-  const handleOnChange = (event) => {
+  const handleOnChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setTask(event.target.value);
   };
+
   const addTask = () => {
-    setTasks([...tasks, task]);
+    setTasks([...tasks, { text: task, isDone: false }]);
     setTask('');
   };
+  const removeTask = (taskText: string) => {
+    setTasks(tasks.filter((task) => task.text !== taskText));
+  };
 
-  const values = { tasks, setTasks, addTask, task, setTask, handleOnChange };
+  const values = {
+    tasks,
+    setTasks,
+    addTask,
+    task,
+    setTask,
+    handleOnChange,
+    removeTask,
+  };
   return (
     <TasksContext.Provider value={values}>{children}</TasksContext.Provider>
   );
