@@ -11,7 +11,6 @@ import { TasksContext, TasksProvider } from '@/context/TasksContext';
 
 export default function Home() {
   const { tasks } = useContext(TasksContext);
-  console.log(tasks);
 
   return (
     <main className="max-w-screen-md mx-auto">
@@ -21,11 +20,7 @@ export default function Home() {
       <div className="mt-10">
         <ListHeader />
       </div>
-      {tasks && (
-        <div className="mt-4">
-          {tasks.length > 0 ? <TaskList /> : <Empty />}
-        </div>
-      )}
+      <div className="mt-4">{tasks.length > 0 ? <TaskList /> : <Empty />}</div>
     </main>
   );
 }
