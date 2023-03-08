@@ -5,6 +5,7 @@ import React, { createContext, ReactNode, useState } from 'react';
 interface ITasks {
   text: string;
   isDone: boolean;
+  id: number;
 }
 
 type TasksContextType = {
@@ -28,11 +29,11 @@ export const TasksProvider = ({ children }: { children: ReactNode }) => {
   };
 
   const addTask = () => {
-    setTasks([...tasks, { text: task, isDone: false }]);
+    setTasks([...tasks, { text: task, isDone: false, id: Date.now() }]);
     setTask('');
   };
-  const removeTask = (taskText: string) => {
-    setTasks(tasks.filter((task) => task.text !== taskText));
+  const removeTask = (taskId: string) => {
+    setTasks(tasks.filter((task) => String(task.id) !== taskId));
   };
 
   const values = {

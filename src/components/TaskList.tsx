@@ -9,7 +9,7 @@ export default function TaskList() {
   return (
     <div className="flex flex-col gap-3 text-white">
       {tasks.map((task, index) => (
-        <Task key={index} task={task} />
+        <Task key={task.id} task={task} />
       ))}
     </div>
   );
