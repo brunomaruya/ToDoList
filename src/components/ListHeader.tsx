@@ -28,7 +28,9 @@ export default function ListHeader() {
       <div className="text-violet-800">
         Done{' '}
         <span className="text-white bg-gray-700 px-1 rounded-xl text-xs">
-          {doneTasks.length}
+          {tasks.length
+            ? `${doneTasks.length} of ${tasks.length}`
+            : tasks.length}
         </span>
       </div>
     </div>
