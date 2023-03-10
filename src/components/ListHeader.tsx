@@ -19,7 +19,7 @@ export default function ListHeader() {
   return (
     <div className="flex justify-between">
       <div className="text-blue-700">
-        Taks{' '}
+        Tasks{' '}
         <span className="text-white bg-gray-700 px-1 rounded-xl text-xs">
           {tasks.length}
         </span>
