@@ -14,7 +14,7 @@ interface ITask {
 
 export default function Task({ task }: ITask) {
   const { removeTask, setTasks } = useContext(TasksContext);
-  const [isChecked, setIsChecked] = useLocalStorage('check', task.isDone);
+  const [isChecked, setIsChecked] = useState(task.isDone);
 
   const handleCheckBoxChange = () => {
     setIsChecked(!isChecked);
@@ -24,10 +24,6 @@ export default function Task({ task }: ITask) {
     setTasks((prevState) =>
       prevState.map((t) => (t.id === task.id ? { ...t, isDone: isChecked } : t))
     );
-  }, [isChecked]);
-
-  useEffect(() => {
-    setIsChecked(false);
   }, [isChecked]);
 
   return (
