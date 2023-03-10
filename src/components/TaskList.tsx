@@ -7,10 +7,12 @@ export default function TaskList() {
   const { tasks } = useContext(TasksContext);
 
   return (
-    <div className="flex flex-col gap-3 text-white">
-      {tasks.map((task, index) => (
-        <Task key={task.id} task={task} />
-      ))}
+    <div>
+      <div className="flex flex-col gap-3 text-white">
+        {tasks.map((task) => (
+          <Task key={task.id} task={task} />
+        ))}
+      </div>
     </div>
   );
 }

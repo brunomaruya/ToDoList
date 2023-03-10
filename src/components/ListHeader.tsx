@@ -8,8 +8,7 @@ interface ITasks {
 }
 
 export default function ListHeader() {
-  const { tasks, setTasks } = useContext(TasksContext);
-  const [doneTasks, setDoneTasks] = useLocalStorage<ITasks[]>('done-tasks', []);
+  const { tasks, setTasks, doneTasks, setDoneTasks } = useContext(TasksContext);
 
   useEffect(() => {
     console.log(tasks);

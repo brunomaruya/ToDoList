@@ -16,6 +16,8 @@ type TasksContextType = {
   setTask: React.Dispatch<React.SetStateAction<string>>;
   handleOnChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
   removeTask: (taskText: string) => void;
+  doneTasks: any;
+  setDoneTasks: any;
 };
 
 export const TasksContext = createContext({} as TasksContextType);
@@ -23,6 +25,7 @@ export const TasksContext = createContext({} as TasksContextType);
 export const TasksProvider = ({ children }: { children: ReactNode }) => {
   const [tasks, setTasks] = useLocalStorage<ITasks[]>('tasks', []);
   const [task, setTask] = useState<string>('');
+  const [doneTasks, setDoneTasks] = useLocalStorage<ITasks[]>('done-tasks', []);
 
   const handleOnChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setTask(event.target.value);
@@ -44,6 +47,8 @@ export const TasksProvider = ({ children }: { children: ReactNode }) => {
     setTask,
     handleOnChange,
     removeTask,
+    setDoneTasks,
+    doneTasks,
   };
   return (
     <TasksContext.Provider value={values}>{children}</TasksContext.Provider>
