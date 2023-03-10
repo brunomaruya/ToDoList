@@ -19,6 +19,7 @@ export default function Task({ task }: ITask) {
   const handleCheckBoxChange = () => {
     setIsChecked(!isChecked);
   };
+
   useEffect(() => {
     setTasks((prevState) =>
       prevState.map((t) => (t.id === task.id ? { ...t, isDone: isChecked } : t))
@@ -27,7 +28,7 @@ export default function Task({ task }: ITask) {
 
   useEffect(() => {
     setIsChecked(false);
-  }, []);
+  }, [isChecked]);
 
   return (
     <div className="flex justify-between rounded-lg items-center gap-2 py-2 px-4 bg-gray-800 border-gray-600 border-[1px]">

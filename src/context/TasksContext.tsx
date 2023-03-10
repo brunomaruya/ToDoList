@@ -11,13 +11,13 @@ interface ITasks {
 type TasksContextType = {
   tasks: ITasks[];
   setTasks: React.Dispatch<React.SetStateAction<ITasks[]>>;
-  addTask: () => void;
   task: string;
   setTask: React.Dispatch<React.SetStateAction<string>>;
+  doneTasks: ITasks[];
+  setDoneTasks: React.Dispatch<React.SetStateAction<ITasks[]>>;
+  addTask: () => void;
+  removeTask: (taskId: string) => void;
   handleOnChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
-  removeTask: (taskText: string) => void;
-  doneTasks: any;
-  setDoneTasks: any;
 };
 
 export const TasksContext = createContext({} as TasksContextType);
@@ -27,28 +27,29 @@ export const TasksProvider = ({ children }: { children: ReactNode }) => {
   const [task, setTask] = useState<string>('');
   const [doneTasks, setDoneTasks] = useLocalStorage<ITasks[]>('done-tasks', []);
 
-  const handleOnChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setTask(event.target.value);
-  };
-
   const addTask = () => {
-    setTasks([...tasks, { text: task, isDone: false, id: Date.now() }]);
+    if (task !== '') {
+      setTasks([...tasks, { text: task, isDone: false, id: Date.now() }]);
+    }
     setTask('');
   };
   const removeTask = (taskId: string) => {
     setTasks(tasks.filter((task) => String(task.id) !== taskId));
   };
 
+  const handleOnChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setTask(event.target.value);
+  };
   const values = {
     tasks,
     setTasks,
-    addTask,
     task,
     setTask,
-    handleOnChange,
-    removeTask,
-    setDoneTasks,
     doneTasks,
+    setDoneTasks,
+    addTask,
+    removeTask,
+    handleOnChange,
   };
   return (
     <TasksContext.Provider value={values}>{children}</TasksContext.Provider>

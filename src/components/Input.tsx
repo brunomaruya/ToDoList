@@ -11,6 +11,7 @@ export default function Input() {
         type="text"
         onChange={handleOnChange}
         value={task}
+        required
       />{' '}
       <button
         className="bg-blue-800 text-white py-2 px-4 rounded-lg hover:brightness-75 active:brightness-50"
